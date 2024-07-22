@@ -18,6 +18,7 @@ export const XregisterController = async (req,res)=>{
         const newUser = await twitterUserModel({
             name:name,
             userName:userName,
+            googleId:"",
             email:email,
             password:hashedPass,
             DOB:DOB,
@@ -56,3 +57,31 @@ export const XregisterController = async (req,res)=>{
 
 }
 
+export const getGoogleAccountController = async(req,res)=>{
+
+    try {
+        const{id}  =  req.body;
+        console.log(id);
+        const user = await twitterUserModel.findOne({
+            
+            _id:id,
+        });
+       
+        if(!user){
+            return res.send({
+                success:false
+            })
+        }
+        return  res.send({
+            success:true,
+            message:"login successfully",
+            userDetails:user
+        })
+        
+       
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+}

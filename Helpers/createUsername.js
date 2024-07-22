@@ -6,7 +6,7 @@ const createUserName = (name)=>{
         userName = userName.substring(0,5);
         
     }
-    userName = userName +'X'+ `${Date.now()}`.substring(6);
+    userName =  "@"+userName +'X'+ `${Date.now()}`.substring(6);
     return userName;
 }
 export default createUserName;

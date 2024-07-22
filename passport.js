@@ -13,6 +13,7 @@ passport.use(
             scope:["profile","email"]
         },
         (accessToken, refreshToken,profile,callback)=>{
+             callback(null,profile)
           
 
 

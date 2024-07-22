@@ -3,15 +3,13 @@ import cors from 'cors'
 import { client_url,port } from "./envProvider.js";
 import session from "express-session";
 import {passport} from "./passport.js";
-import webSocketSetup from "./webSocketSetup.js";
-import http from 'http'
 import{ router as AuthRoutes} from './Routes/authRoutes.js'
 import { connectDb } from "./db/DBconnection.js";
-import { avatarController } from "./controller/avatarController.js";
+
 const App = express();
-const server = http.createServer(App)
+
 //websocket setup
-webSocketSetup(server)
+
 //session setup
 App.use(session({
     secret:'hnddlelds',
@@ -34,7 +32,7 @@ App.use(express.json());
 connectDb();
 
 App.use("/auth",AuthRoutes);
-App.post("/upload",avatarController)
+
 
 
 
