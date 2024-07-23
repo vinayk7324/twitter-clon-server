@@ -68,7 +68,7 @@ router.get("/login/success", async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
+        console.log("error in login-success ::",error);
 
     }
 
