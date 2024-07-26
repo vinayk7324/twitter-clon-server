@@ -5,6 +5,7 @@ import { getGoogleAccountController, XregisterController } from "../controller/t
 import { SendOtp, twitterOtpVerification } from "../twitter-nodemailer/OTPController.js";
 import { twitterUserModel } from "../model/twitterUserModel.js";
 import createUserName from './../Helpers/createUsername.js';
+import { hashXPassword } from "../Helpers/passwordHashing.js";
 
 const router = Router()
 
@@ -29,6 +30,7 @@ router.get("/login/success", async (req, res) => {
                 userName:user.userName,
                 googleId:"",
                 email:user.email,
+                password:user.password,
                 isAvatarSet:true,
                 avatarImage:req.user?._json.picture,
                 DOB:user.DOB,
@@ -55,6 +57,7 @@ router.get("/login/success", async (req, res) => {
             googleId:googleUser.sub,
             email:googleUser.email,
             isAvatarSet:true,
+            password: await hashXPassword({password:userName}),
             avatarImage:googleUser.picture,
             DOB:"",
         }).save();
@@ -62,6 +65,7 @@ router.get("/login/success", async (req, res) => {
             return res.send({
                 success:true,
                 message:"register successfully",
+                mailMessage: `this is your default password:: ${userName}`,
                 user:newUser
             })
         }
