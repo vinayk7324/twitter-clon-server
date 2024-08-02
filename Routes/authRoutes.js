@@ -80,7 +80,7 @@ router.get("/login/success", async (req, res) => {
 })
 router.get('/google/callback',
     passport.authenticate("google", {
-        successRedirect: `${client_url}/twitter-home-page`,
+        successRedirect: `${client_url}`,
         failureRedirect: "/login/failed"
 
 
