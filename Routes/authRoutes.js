@@ -36,17 +36,15 @@ router.get("/login/success", async (req, res) => {
                 DOB:user.DOB,
 
             }).save()
+            
+           }
+          else{
             return res.status(200).send({
                 success:false,
                 message:"user already exist",
-                user:updateuser
+                user:user
             })
-           }
-           return res.status(200).send({
-            success:false,
-            message:"user already exist",
-            user:user
-        })
+          }
         }
         const googleUser = req.user?._json;
         const userName = createUserName(googleUser?.name)
@@ -67,6 +65,12 @@ router.get("/login/success", async (req, res) => {
                 message:"register successfully",
                 mailMessage: `this is your default password:: ${userName}`,
                 user:newUser
+            })
+        }
+        else{
+            return res.send({
+                success:false,
+                message:"please try again"
             })
         }
 
